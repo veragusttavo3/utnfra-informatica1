@@ -14,12 +14,14 @@ c)Salir del programa.*/
 #include<string.h>
 #include<ctype.h>
 #include<math.h>
+//variables constantes
+#define X 4
 //variables globales
 char opc='p';
 float numLegajo;
 float altura;
-float alumAltura[40];
-float alumLegajo[40];
+float alumAltura[X];
+float alumLegajo[X];
 int mayor=0;
 //inicio del programa
 int main(){
@@ -33,7 +35,7 @@ int main(){
         scanf("%c",&opc);
         tolower(opc);
         switch(opc){
-                case 'a':   for(int i=0;i<40;i++){
+                case 'a':   for(int i=0;i<X;i++){
                                 printf("Ingrese Numero de legajo: ");
                                 scanf("%f",&numLegajo);
                                 printf("ingrese la altura (ej: 1.35 )m: ");
@@ -43,7 +45,7 @@ int main(){
                                 }
                 break;
                 case 'b':       
-                                for(int i=0;i<40;i++){
+                                for(int i=0;i<X;i++){
                                         if(mayor<alumAltura[i]){
                                                 mayor=i;
                                         }
