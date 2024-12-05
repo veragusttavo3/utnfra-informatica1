@@ -13,7 +13,7 @@ d)	Salir del programa.
 #include<ctype.h>
 #include<math.h>
 //constantes globales
-#define X 30
+#define X 4
 //variables globales
 char opcion='q';
 int j=0;
@@ -21,7 +21,6 @@ int alumEdades[X];
 int alumMayores[X];
 //funciones
 void imprimirAlumMayores(){
-        system("cls");
         printf("Hubieron %i alumnos mayores\n",j);
         for(int i=0;i<j;i++){
                 printf("El alumno %i es mayor con %ianios\n",(alumMayores[i]+1),alumEdades[alumMayores[i]]);
@@ -51,11 +50,9 @@ void menu(){
                 break;
         }}
 void introducirOpcion(){
-        fflush(stdin);
         scanf("%c",&opcion);
         tolower(opcion);
-        getchar(); // Limpia el búfer
-        system("cls");}
+        }
 void mensajeMenu(){
         printf("Menu:\n"
         "A- Ingresar edades\n"
@@ -68,6 +65,7 @@ int main(){
         mensajeMenu();
         introducirOpcion();
         menu();
+        getchar(); // Limpia el búfer
         }while(opcion!='d');
 return 0;
 }
