@@ -29,8 +29,8 @@ cantidad de ingreso
 #include<ctype.h>
 #include<math.h>
 //constantes globales
-#define F 5
-#define C 50
+#define F 5 //filas; deposito
+#define C 50 //columnas: tipos
 //variables globales
 char opcion='q';
 int mayorDeposito;
@@ -38,11 +38,12 @@ int mayorTipo;
 int deposito;
 int lumen;
 int tipo;
-int promDeposito[F]={0};
-int promTipo[C]={0};
+int terminar=0;
+float promDeposito[F]={0};
+float promTipo[C]={0};
 int matrizLumen[F][C]={0};
 int matrizCantidad[F][C]={0};
-int promedio;
+float promedio;
 //funciones
 void mayorMedicion(){
     int cantidad=0;
@@ -53,7 +54,10 @@ void mayorMedicion(){
            mayorTipo=j;
            mayorDeposito=i;
         }
-    }}}
+    }
+    }
+    printf("Donde hubo mayor medicion fue en el deposito: %i y tipo: %i con %i veces\n",mayorDeposito+1,mayorDeposito+1,cantidad);
+    }
 void promedioLumen(){
     //Por deposito
     int j,i;
@@ -61,49 +65,73 @@ void promedioLumen(){
         for(j=0;j<C;j++){
             promDeposito[i]+=matrizLumen[i][j];
     }
-            promDeposito[i]/=j;
+            printf("total deposito %i: %.2f / %i = ",i,promDeposito[i],F);
+            promDeposito[i]/=F;
+            printf("%.2f\n\n",promDeposito[i]);
     }
     //Por tipo
       for(j=0;j<C;j++){
        for(i=0;i<F;i++){
             promTipo[j]+=matrizLumen[i][j];
     }
-            printf("por tipo %i /= %i: ",promTipo[j]);
-            promTipo[j]/=i;
-            printf("%i",promTipo[j]);
+
+            printf("\ntotal tipo %i: %.2f / %i: ",j,promTipo[j],C);
+            promTipo[j]/=C;
+            printf("%.2f\n",promTipo[j]);
     }
   
 }
 void cargarLed(){
-    char terminar='p';
-   do{
-     do{
+   while(terminar!=1){
+        tipo=-1;
+        deposito=-1;
+        lumen=-1;
+    while(tipo<0 || tipo>C){
     printf("Introducir tipo de led?: ");
     scanf("%i",&tipo);
     tipo--;
-    }while(tipo<0 || tipo>50);
-    do{
+    };
+    while(deposito<0 || deposito>F){
     printf("Introducir deposito?: ");
     scanf("%i",&deposito);
     deposito--;
-    }while(deposito<0 || deposito>5);
-    do{
+    };
+    while(lumen<1){
     printf("Introducir lumen?: ");
     scanf("%i",&lumen);
-    }while(lumen<1);
+    };
 
     matrizLumen[deposito][tipo]+=lumen;
+    matrizCantidad[deposito][tipo]++;
     
-    printf("Desea terminar de cargar(s/n): ");
-    scanf("%c",&terminar);
-   }while(terminar!='s');
+    printf("Desea terminar de cargar (1-si|2-no): ");
+    scanf("%i",&terminar);
+    
+   };
 
 
 
     }
+void imprimirMatriz(){
+        for(int i=0;i<F;i++){
+                for(int j=0;j<C;j++){
+                        printf(" %i ",matrizLumen[i][j]);
+                }
+                printf("\n");
+        }
+        printf("\n\nMatriz cantidad\n\n");
+                for(int i=0;i<F;i++){
+                for(int j=0;j<C;j++){
+                        printf(" %i ",matrizCantidad[i][j]);
+                }
+                printf("\n");
+        }
+}
 void menu(){
         switch(opcion){
                 case 'a':   cargarLed();
+                           imprimirMatriz();
+                           terminar=0;
                 break;
                 case 'b':   promedioLumen();
                 break;
@@ -111,12 +139,14 @@ void menu(){
                 break;
                 case 'd':   printf("Salir del Programa");
                 break;
-        }}
+        }
+        getchar(); // Limpia el búfer
+        }
 void introducirOpcion(){
-        fflush(stdin);
+        
         scanf("%c",&opcion);
         tolower(opcion);
-        getchar(); // Limpia el búfer
+        
 
         }
 
@@ -128,6 +158,7 @@ void mensajeMenu(){
         "D- Salir del programa\n");}
 //inicio del programa
 int main(){
+         
         do{
         mensajeMenu();
         introducirOpcion();
