@@ -5,12 +5,14 @@
 #include<string.h>
 #include<ctype.h>
 #include<math.h>
+//variables constantes
+#define X 4
 //variables globales
 char opc='p';
 float numLegajo;
 float altura;
-float alumAltura[40];
-float alumLegajo[40];
+float alumAltura[X];
+float alumLegajo[X];
 int mayor=0;
 //funciones
 void imprimir_menu(){
@@ -23,17 +25,11 @@ void imprimir_menu(){
 int main(){
 
    do{
-       /* printf("Menu:\n"
-        "A- Leer Fichas\n"     (modificado)
-        "B- El mas alto?\n"
-        "C- Salir\n");*/ 
         imprimir_menu();      //reemplazo
-        fflush(stdin);
         scanf("%c",&opc);
         tolower(opc);
-        getchar(); // Limpia el búfer
         switch(opc){
-                case 'a':   for(int i=0;i<40;i++){
+                case 'a':   for(int i=0;i<X;i++){
                                 printf("Ingrese Numero de legajo: ");
                                 scanf("%f",&numLegajo);
                                 printf("ingrese la altura (ej: 1.35 )m: ");
@@ -43,7 +39,7 @@ int main(){
                                 }
                 break;
                 case 'b':       
-                                for(int i=0;i<40;i++){
+                                for(int i=0;i<X;i++){
                                         if(mayor<alumAltura[i]){
                                                 mayor=i;
                                         }
@@ -55,7 +51,7 @@ int main(){
                 case 'c': printf("Salir del Programa");
                 break;
                 }
-        system("cls");
+                getchar(); // Limpia el búfer
    }while(opc!='c');
 return 0;
 }
