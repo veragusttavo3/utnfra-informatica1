@@ -32,7 +32,7 @@ void imprimir(){
     printf("Matriz ingresada:\n");
     for(int i=0;i<F;i++){
         for(int j=0;j<C;j++){
-        printf(" %i| ",matriz[i][j]);
+        printf(" %i ",matriz[i][j]);
     }
     printf("\n");
     }
@@ -45,15 +45,15 @@ void imprimir(){
     printf("\n");
     }}
 void  datoMeColum(){
-    int dato=0;
+    int dato=1000;
     int j=0;
     for(int i=0;i<F;i++){
         for(j;j<C;j++){
          if(dato>matriz[i][j]){
             dato=matriz[i][j];
-            datoEnColum=j;
+            datoEnColum=j+1;
          }}}
-         printf("La Columna con mayor elemento es: %i\n\n",j);}
+         printf("La Columna con el menor elemento es: %i\n\n",datoEnColum);}
 void  datoMaFila(){
     int dato=0;
     int i=0;
@@ -61,9 +61,9 @@ void  datoMaFila(){
         for(int j=0;j<C;j++){
          if(dato<matriz[i][j]){
             dato=matriz[i][j];
-            datoEnFila=i;
+            datoEnFila=i+1;
          }}}
-          printf("La Fila con mayor elemento es: %i\n\n",i);}
+          printf("La Fila con mayor elemento es: %i\n\n",datoEnFila);}
 void leerMatriz(){
     printf("Introducir datos en mi matriz de 3x5\n");
     for(int i=0;i<F;i++){
@@ -75,17 +75,19 @@ void menu(){
         switch(opcion){
                 case 'a':   leerMatriz();
                 break;
-                case 'b':   datoMaFila();
+                case 'b':   datoMaFila(); //dato mayor en que fila esta?
                 break;
-                case 'c':   datoMeColum();
+                case 'c':   datoMeColum(); //dato menor en que columna esta?
                 break;
                 case 'd':   imprimir();
                 break;
                 case 'e':   printf("Salir del Programa");
                 break;
-        }}
+        }
+        //fflush(stdin);
+        getchar();
+        }
 void introducirOpcion(){
-        fflush(stdin);
         scanf("%c",&opcion);
         tolower(opcion);
         }
