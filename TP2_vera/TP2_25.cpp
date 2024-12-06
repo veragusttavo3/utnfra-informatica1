@@ -1,34 +1,30 @@
 /*25)	Escribir una función llamada absoluto que reciba un número entero y devuelva su valor absoluto.*/
 //bibliotecas
 #include<stdio.h>
-#include<stdlib.h>
+#include<stdlib.h> //necesario
 #include<string.h>
 #include<ctype.h>
 #include<math.h>
 //constantes globales
-#define X 4
 //variables globales
-int menor;
-int mayor;
-int alumLeg[X];
-char opcion='q';
-float alumAlt[X];
-float promAltura;
-float datoMayor=0;
-float diferenciaAlt;
-float datoMenor=100;
+
 //funciones
-void absoluto(){
-    //do{
-    //introducir un numero
-    getchar(); // Limpia el búfer
-    //buscar su absoluto
-    //imprimir su absoluto
-    //otro numero? 
-    //}while(continuar!='n');|
+int  absoluto(int n){
+
+     n= abs(n);
+     return n;
+   
 }
 //inicio del programa
 int main(){
-       
+    int x,valor;
+    //introducir un numero
+    printf("introducir valor: ");
+    scanf("%i",&x);
+    //buscar su absoluto
+    valor= absoluto(x);
+    //imprimir su absoluto
+    printf("valor absoluto de %i es: %i",x,valor);
+    //otro numero? 
 return 0;
 }
