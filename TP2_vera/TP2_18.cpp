@@ -14,8 +14,9 @@ e)	Salir del programa.
 //constantes globales
 #define X 4
 //variables globales
-int menor;
-int mayor;
+float aux;
+int menor[X];
+int mayor[X];
 int alumLeg[X];
 char opcion='q';
 float alumAlt[X];
@@ -23,7 +24,38 @@ float promAltura;
 float datoMayor=0;
 float diferenciaAlt;
 float datoMenor=100;
+int contIndicesMayor=0;
+int contIndicesMenor=0;
 //funciones
+void vector(){
+        for(int i=0;i<sizeof(alumAlt)/4;i++){
+             printf(" %.2f ",alumAlt[i]);
+             }
+             }
+void ordenamientoBurbuja(){
+        for(int i=0;i<sizeof(alumAlt)/4;i++){
+        for(int j=0;j<(sizeof(alumAlt)/4)-1;j++){ 
+            //vector();
+            //printf("\n\nEl numero %.2f > numero %.2f?\n\n",alumAlt[j],alumAlt[j+1]);
+           if(alumAlt[j]>alumAlt[j+1]){
+                printf("cambio\n");
+
+                aux=alumAlt[j];
+                alumAlt[j]=alumAlt[j+1];
+                alumAlt[j+1]=aux;
+                aux=alumLeg[j];
+                alumLeg[j]=alumLeg[j+1];
+                alumLeg[j+1]=aux;
+               }else if(alumAlt[j]==alumAlt[j+1]){
+                        if(alumLeg[j]>alumLeg[j+1]){
+                              aux=alumLeg[j];
+                              alumLeg[j]=alumLeg[j+1];
+                              alumLeg[j+1]=aux;  
+                        }
+               }
+               }
+               }
+               }
 void diferenciaAltMaMe(){
     diferenciaAlt=datoMayor-datoMenor;
     printf("\nLa diferncia entre el mayor y menor es de: %.2fm\n",diferenciaAlt);
@@ -37,33 +69,47 @@ void promedioAlt(){
     printf("El promedio de altura es: %.2fm",promAltura);
 }
 void imprMenorMayor(){
+        //ordenar
+       ordenamientoBurbuja();
      for(int i=0;i<X;i++){
         printf("legajo: %i y altura: %.2f\n",alumLeg[i],alumAlt[i]);
         }
-        system("pause");
 }
 void altMenor(){
     for(int i=0;i<X;i++){
         if(datoMenor>alumAlt[i]){
             datoMenor=alumAlt[i];
-            menor=i;
+            menor[0]=i;
+            contIndicesMenor=0;
+        }else if(datoMenor==alumAlt[i]){
+                menor[contIndicesMenor++]=i;
         }
         }
-        printf("El menor con: %.2fm y legajo: %i\n\n",datoMenor,alumLeg[menor]);
+        for(int i=0;i<=contIndicesMenor;i++){
+        printf("El menor con: %.2fm y legajo: %i\n\n",datoMenor,alumLeg[menor[i]]);
+        }
 }
 void altMayor(){
     for(int i=0;i<X;i++){
         if(datoMayor<alumAlt[i]){
             datoMayor=alumAlt[i];
-            mayor=i;
+            mayor[0]=i;
+            contIndicesMayor=0;
+        }else if(datoMayor==alumAlt[i]){
+                mayor[contIndicesMayor++]=i;
         }
         }
-        printf("El mayor con: %.2fm y legajo: %i\n\n",datoMayor,alumLeg[mayor]);
+        for(int i=0;i<=contIndicesMayor;i++){
+        printf("El mayor con: %.2fm y legajo: %i\n\n",datoMayor,alumLeg[mayor[i]]);
+        }
 }
 void cargarAlumnos(){
         for(int i=0;i<X;i++){
+        do{
         printf("Ingrese Legajo del alumno %i del curso de Informatica I(4 digitos): ",(i+1));
         scanf("%i",&alumLeg[i]);
+        }while (alumLeg[i] < 1000 || alumLeg[i] > 9999);
+
         printf("Ingrese Altura del alumno %i del curso de Informatica I(metros): ",(i+1));
         scanf("%f",&alumAlt[i]);}
         }
@@ -82,9 +128,11 @@ void menu(){
                 break;
                 case 'e':   printf("Salir del Programa");
                 break;
-        }}
+        }
+        //fflush(stdin);
+        getchar();
+        }
 void introducirOpcion(){
-        fflush(stdin);
         scanf("%c",&opcion);
         tolower(opcion);
         }
