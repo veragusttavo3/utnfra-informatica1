@@ -35,7 +35,7 @@ void vector(){
 void ordenamientoBurbuja(){
         for(int i=0;i<sizeof(alumAlt)/4;i++){
         for(int j=0;j<(sizeof(alumAlt)/4)-1;j++){ 
-            //vector();
+            //vector(); //visualizar cambios
             //printf("\n\nEl numero %.2f > numero %.2f?\n\n",alumAlt[j],alumAlt[j+1]);
            if(alumAlt[j]>alumAlt[j+1]){
                 printf("cambio\n");
@@ -130,7 +130,7 @@ void menu(){
                 break;
         }
         //fflush(stdin);
-        getchar();
+        getchar(); 
         }
 void introducirOpcion(){
         scanf("%c",&opcion);
